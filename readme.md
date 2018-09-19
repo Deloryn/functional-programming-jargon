@@ -1,12 +1,12 @@
 # Functional Programming Jargon
 
-Functional programming (FP) provides many advantages, and its popularity has been increasing as a result. However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary, we hope to make learning FP easier.
+Programowanie funkcyjne (FP) ma wiele zalet, w wyniku czego zyskuje popularność. Jednak każdy paradygmat programowania ma swój unikalny żargon i programowanie funkcyjne nie jest tutaj wyjątkiem. Poprzez dostarczenie Wam słowniczka, mamy nadzieję, że nauka programowania funkcyjnego będzie łatwiejsza.
 
-Examples are presented in JavaScript (ES2015). [Why JavaScript?](https://github.com/hemanth/functional-programming-jargon/wiki/Why-JavaScript%3F)
+Przykłady są przedstawione w JavaScript (ES2015). [Dlaczego JavaScript?](https://github.com/hemanth/functional-programming-jargon/wiki/Why-JavaScript%3F)
 
 *This is a [WIP](https://github.com/hemanth/functional-programming-jargon/issues/20); please feel free to send a PR ;)*
 
-Where applicable, this document uses terms defined in the [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
+Tam, gdzie to możliwe, dokument ten korzysta z terminów zdefiniowanych w [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
 
 __Translations__
 * [Portuguese](https://github.com/alexmoreno/jargoes-programacao-funcional)
@@ -15,8 +15,9 @@ __Translations__
 * [Bahasa Indonesia](https://github.com/wisn/jargon-pemrograman-fungsional)
 * [Scala World](https://github.com/ikhoon/functional-programming-jargon.scala)
 * [Korean](https://github.com/sphilee/functional-programming-jargon)
+* [Polish](https://github.com/Deloryn/functional-programming-jargon)
 
-__Table of Contents__
+__Spis treści__
 <!-- RM(noparent,notop) -->
 
 * [Arity](#arity)
@@ -67,7 +68,7 @@ __Table of Contents__
 
 ## Arity
 
-The number of arguments a function takes. From words like unary, binary, ternary, etc. This word has the distinction of being composed of two suffixes, "-ary" and "-ity." Addition, for example, takes two arguments, and so it is defined as a binary function or a function with an arity of two. Such a function may sometimes be called "dyadic" by people who prefer Greek roots to Latin. Likewise, a function that takes a variable number of arguments is called "variadic," whereas a binary function must be given two and only two arguments, currying and partial application notwithstanding (see below).
+Arność. Liczba argumentów pobieranych przez funkcję. Pochodzi od słów takich jak unary, binary, ternary etc. To słowo ma tę różnicę, że składa się z dwóch przyrostków ("-ary" i "-ity"). Np. dodawanie pobiera dwa argumenty, zatem jest zdefiniowane jako funkcja binarna lub jako funkcja o arności równej 2. Ludzie, którzy preferują greckie korzenie nazewnictwa (zamiast łacińskich), mogą czasem taką funkcję nazywać "diadyczną". Kiedy ilość argumentów funkcji może być różna, jest ona nazywana funkcją ze zmienną liczbą argumentów. Natomiast funkcja binarna musi mieć dwa i tylko dwa argumenty. Zobacz poniżej currying i partial application.
 
 ```js
 const sum = (a, b) => a + b
@@ -80,7 +81,7 @@ console.log(arity) // 2
 
 ## Higher-Order Functions (HOF)
 
-A function which takes a function as an argument and/or returns a function.
+Funkcja, która pobiera funkcję jako argument i/lub zwraca funkcję.
 
 ```js
 const filter = (predicate, xs) => xs.filter(predicate)
@@ -96,8 +97,8 @@ filter(is(Number), [0, '1', 2, null]) // [0, 2]
 
 ## Closure
 
-A closure is a scope which retains variables available to a function when it's created. This is important for
-[partial application](#partial-application) to work.
+Closure to trwały zakres zmiennych dostępnych dla danej funkcji w momencie, kiedy została utworzona. Jest to ważne dla
+[partial application](#partial-application).
 
 
 ```js
@@ -108,27 +109,25 @@ const addTo = (x) => {
 }
 ```
 
-We can call `addTo` with a number and get back a function with a baked-in `x`.
+Możemy wywołać `addTo`, podając pewną liczbę jako argument i otrzymamy funkcję z "wbudowaną" wartością`x`.
 
 ```js
 var addToFive = addTo(5)
 ```
 
-In this case the `x` is retained in `addToFive`'s closure with the value `5`. We can then call `addToFive` with the `y`
-and get back the desired number.
+W tym przypadku `x` jest zawarte w closure `addToFive` z wartością 5. Możemy zatem wywołać `addToFive` z `y` i wtedy otrzymać pożądany wynik.
 
 ```
 addToFive(3) // => 8
 ```
 
-This works because variables that are in parent scopes are not garbage-collected as long as the function itself is retained.
+To działa, ponieważ zmienne, które są w zasięgu rodzica, nie są usuwane przez garbage-collectora tak długo, jak funkcja jest zachowana.
 
-Closures are commonly used in event handlers so that they still have access to variables defined in their parents when they
-are eventually called.
+"Closury" są powszechnie wykorzystywane w event handlerach, dzięki czemu nadal mają dostęp do zmiennych zdefiniowanych u ich rodziców, kiedy są wywołane.
 
-__Further reading__
+__Dalsza lektura__
 * [Lambda Vs Closure](http://stackoverflow.com/questions/220658/what-is-the-difference-between-a-closure-and-a-lambda)
-* [How do JavaScript Closures Work?](http://stackoverflow.com/questions/111102/how-do-javascript-closures-work)
+* [Jak działa Closure w JavaScripcie?](http://stackoverflow.com/questions/111102/how-do-javascript-closures-work)
 
 
 ## Partial Application

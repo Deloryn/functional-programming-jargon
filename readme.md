@@ -1,5 +1,4 @@
-# Functional Programming Jargon
-[Link do oryginału (wersja angielska)](https://github.com/hemanth/functional-programming-jargon)
+# Słowniczek programowania funkcyjnego
 
 Programowanie funkcyjne (FP) ma wiele zalet, w wyniku czego zyskuje popularność. Jednak każdy paradygmat programowania ma swój unikalny żargon i programowanie funkcyjne nie jest tutaj wyjątkiem. Poprzez dostarczenie Wam słowniczka, mamy nadzieję, że jego nauka będzie łatwiejsza.
 
@@ -8,14 +7,15 @@ Przykłady są przedstawione w JavaScript (ES2015). [Dlaczego JavaScript?](https
 
 Tam, gdzie to możliwe, dokument ten korzysta z terminów zdefiniowanych w [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
 
-__Translations__
-* [Portuguese](https://github.com/alexmoreno/jargoes-programacao-funcional)
-* [Spanish](https://github.com/idcmardelplata/functional-programming-jargon/tree/master)
-* [Chinese](https://github.com/shfshanyue/fp-jargon-zh)
+__Tłumaczenia__
+* [Link do oryginału (wersja angielska)](https://github.com/hemanth/functional-programming-jargon)
+* [Portugalski](https://github.com/alexmoreno/jargoes-programacao-funcional)
+* [Hiszpański](https://github.com/idcmardelplata/functional-programming-jargon/tree/master)
+* [Chiński](https://github.com/shfshanyue/fp-jargon-zh)
 * [Bahasa Indonesia](https://github.com/wisn/jargon-pemrograman-fungsional)
 * [Scala World](https://github.com/ikhoon/functional-programming-jargon.scala)
-* [Korean](https://github.com/sphilee/functional-programming-jargon)
-* [Polish](https://github.com/Deloryn/functional-programming-jargon)
+* [Koreański](https://github.com/sphilee/functional-programming-jargon)
+* [Polski](https://github.com/Deloryn/functional-programming-jargon)
 
 __Spis treści__
 <!-- RM(noparent,notop) -->

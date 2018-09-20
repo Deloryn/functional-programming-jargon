@@ -1,4 +1,5 @@
 # Functional Programming Jargon
+[Link do oryginału (wersja angielska)](https://github.com/hemanth/functional-programming-jargon)
 
 Programowanie funkcyjne (FP) ma wiele zalet, w wyniku czego zyskuje popularność. Jednak każdy paradygmat programowania ma swój unikalny żargon i programowanie funkcyjne nie jest tutaj wyjątkiem. Poprzez dostarczenie Wam słowniczka, mamy nadzieję, że jego nauka będzie łatwiejsza.
 

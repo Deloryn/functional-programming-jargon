@@ -204,8 +204,8 @@ __Dalsza lektura__
 Łączenie dwóch funkcji w trzecią funkcję tak, że wyjście (output) jednej funkcji jest wejściem (input) drugiej.
 
 ```js
-const compose = (f, g) => (a) => f(g(a)) // Definition
-const floorAndToString = compose((val) => val.toString(), Math.floor) // Usage
+const compose = (f, g) => (a) => f(g(a)) // Definicja
+const floorAndToString = compose((val) => val.toString(), Math.floor) // Użycie
 floorAndToString(121.212121) // '121'
 ```
 

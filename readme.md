@@ -68,7 +68,7 @@ __Spis treści__
 
 ## Arity
 
-Arność. Liczba argumentów pobieranych przez funkcję. Pochodzi od słów takich jak unary, binary, ternary etc. To słowo wyróżnia się tym, że składa się z dwóch przyrostków ("-ary" i "-ity"). Np. dodawanie pobiera dwa argumenty, zatem jest zdefiniowane jako funkcja binarna lub jako funkcja o arności równej 2. Ludzie, którzy preferują greckie korzenie nazewnictwa (zamiast łacińskich), mogą czasem taką funkcję nazywać "diadyczną". Kiedy ilość argumentów funkcji może być różna, jest ona nazywana funkcją ze zmienną liczbą argumentów. Natomiast funkcja binarna musi mieć dwa i tylko dwa argumenty. Zobacz poniżej: currying i partial application.
+Arność. Liczba argumentów pobieranych przez funkcję. Pochodzi od słów takich jak unary, binary, ternary itd. To słowo wyróżnia się tym, że składa się z dwóch przyrostków ("-ary" i "-ity"). Np. dodawanie pobiera dwa argumenty, zatem jest zdefiniowane jako funkcja binarna lub jako funkcja o arności równej 2. Ludzie, którzy preferują greckie korzenie nazewnictwa (zamiast łacińskich), mogą czasem taką funkcję nazywać "diadyczną". Kiedy ilość argumentów funkcji może być różna, jest ona nazywana funkcją ze zmienną liczbą argumentów (variadic). Natomiast funkcja binarna musi mieć dwa i tylko dwa argumenty. Zobacz poniżej: currying i partial application.
 
 ```js
 const sum = (a, b) => a + b
@@ -123,43 +123,43 @@ addToFive(3) // => 8
 
 To działa, ponieważ zmienne, które są w zasięgu rodzica, nie są usuwane przez garbage-collectora tak długo, jak funkcja jest zachowana.
 
-"Closury" są powszechnie wykorzystywane w event handlerach, dzięki czemu nadal mają dostęp do zmiennych zdefiniowanych u ich rodziców, kiedy są wywołane.
+Closure są powszechnie wykorzystywane w event handlerach, dzięki czemu nadal mają dostęp do zmiennych zdefiniowanych u ich rodziców, kiedy są wywołane.
 
 __Dalsza lektura__
 * [Lambda Vs Closure](http://stackoverflow.com/questions/220658/what-is-the-difference-between-a-closure-and-a-lambda)
-* [Jak działa Closure w JavaScripcie?](http://stackoverflow.com/questions/111102/how-do-javascript-closures-work)
+* [Jak działają Closure w JavaScripcie?](http://stackoverflow.com/questions/111102/how-do-javascript-closures-work)
 
 
 ## Partial Application
 
-Partially applying a function means creating a new function by pre-filling some of the arguments to the original function.
+Partial application polega na tym, że tworzymy nową funkcję, która z góry jest wypełniona niektórymi argumentami z funkcji bazowej.
 
 
 ```js
-// Helper to create partially applied functions
-// Takes a function and some arguments
+// Pomocnik do tworzenia funkcji korzystających z partial application
+// Pobiera funkcję i część argumentów
 const partial = (f, ...args) =>
-  // returns a function that takes the rest of the arguments
+  // zwraca funkcję, która pobiera resztę argumentów
   (...moreArgs) =>
-    // and calls the original function with all of them
+    // i wywołuje oryginalną funkcję posiadającą je wszystkie
     f(...args, ...moreArgs)
 
-// Something to apply
+// Przykładowa funkcja
 const add3 = (a, b, c) => a + b + c
 
-// Partially applying `2` and `3` to `add3` gives you a one-argument function
+// Wykorzystujemy partial application do "wbudowania" liczb 2 i 3 do funkcji add3. Daje to nam jednoargumentową funkcję.
 const fivePlus = partial(add3, 2, 3) // (c) => 2 + 3 + c
 
 fivePlus(4) // 9
 ```
 
-You can also use `Function.prototype.bind` to partially apply a function in JS:
+Możesz także użyć `Function.prototype.bind`, by wykonać partial application dla funkcji w JS:
 
 ```js
 const add1More = add3.bind(null, 2, 3) // (c) => 2 + 3 + c
 ```
 
-Partial application helps create simpler functions from more complex ones by baking in data when you have it. [Curried](#currying) functions are automatically partially applied.
+Partial application pomaga w tworzeniu prostszych funkcji poprzez "wbudowywanie" do nich danych dla funkcji bardziej złożonych. ["Curried functions"](#currying) automatycznie korzystają z partial application.
 
 
 ## Currying

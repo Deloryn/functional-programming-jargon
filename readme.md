@@ -76,7 +76,7 @@ const sum = (a, b) => a + b
 const arity = sum.length
 console.log(arity) // 2
 
-// The arity of sum is 2
+// Arność funkcji sum wynosi 2
 ```
 
 ## Higher-Order Functions (HOF)
@@ -164,9 +164,9 @@ Partial application pomaga w tworzeniu prostszych funkcji poprzez "wbudowywanie"
 
 ## Currying
 
-The process of converting a function that takes multiple arguments into a function that takes them one at a time.
+Proces zamiany funkcji, która pobiera wiele argumentów, w funkcję, która pobiera je wszystkie na raz.
 
-Each time the function is called it only accepts one argument and returns a function that takes one argument until all arguments are passed.
+Za każdym razem, kiedy funkcja jest wywołana, przyjmuje tylko jeden argument i zwraca funkcję, która pobiera jeden argument. Proces trwa do momentu, aż wszystkie argumenty zostaną przekazane.
 
 ```js
 const sum = (a, b) => a + b
@@ -182,9 +182,9 @@ add2(10) // 12
 ```
 
 ## Auto Currying
-Transforming a function that takes multiple arguments into one that if given less than its correct number of arguments returns a function that takes the rest. When the function gets the correct number of arguments it is then evaluated.
+Przekształcanie funkcji, która pobiera wiele argumentów, w jedną, która ma taką cechę: jeśli podamy mniej argumentów niż wynosi jej arność, to zwraca funkcję, która pobiera resztę potrzebnych argumentów. Kiedy funkcja dostaje odpowiednią liczbę argumentów, to wtedy obliczana jest jej wartość.
 
-lodash & Ramda have a `curry` function that works this way.
+lodash & Ramda mają funkcję `curry`, która działa w ten sposób.
 
 ```js
 const add = (x, y) => x + y
@@ -195,13 +195,13 @@ curriedAdd(1) // (y) => 1 + y
 curriedAdd(1)(2) // 3
 ```
 
-__Further reading__
+__Dalsza lektura__
 * [Favoring Curry](http://fr.umio.us/favoring-curry/)
 * [Hey Underscore, You're Doing It Wrong!](https://www.youtube.com/watch?v=m3svKOdZijA)
 
 ## Function Composition
 
-The act of putting two functions together to form a third function where the output of one function is the input of the other.
+Łączenie dwóch funkcji w trzecią funkcję tak, że wyjście (output) jednej funkcji jest wejściem (input) drugiej.
 
 ```js
 const compose = (f, g) => (a) => f(g(a)) // Definition

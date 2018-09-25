@@ -211,29 +211,29 @@ floorAndToString(121.212121) // '121'
 
 ## Continuation
 
-At any given point in a program, the part of the code that's yet to be executed is known as a continuation.
+W dowolnym miejscu w programie, ta część kodu, która pozostała jeszcze do wykonania, nazywana jest kontynuacją.
 
 ```js
-const printAsString = (num) => console.log(`Given ${num}`)
+const printAsString = (num) => console.log(`Wynik: ${num}`)
 
 const addOneAndContinue = (num, cc) => {
   const result = num + 1
   cc(result)
 }
 
-addOneAndContinue(2, printAsString) // 'Given 3'
+addOneAndContinue(2, printAsString) // 'Wynik: 3'
 ```
 
-Continuations are often seen in asynchronous programming when the program needs to wait to receive data before it can continue. The response is often passed off to the rest of the program, which is the continuation, once it's been received.
+Kontynuacje często się pojawiają w programowaniu asynchronicznym, kiedy program potrzebuje zaczekać na otrzymanie danych, zanim będzie mógł kontynuować. Odpowiedź często jest przekazywana do reszty programu, która jest kontynuacją po jej otrzymaniu.
 
 ```js
 const continueProgramWith = (data) => {
-  // Continues program with data
+  // Kontynuuję wykonywanie programu z tymi danymi
 }
 
 readFileAsync('path/to/file', (err, response) => {
   if (err) {
-    // handle error
+    // obsługa błędu
     return
   }
   continueProgramWith(response)
@@ -242,8 +242,7 @@ readFileAsync('path/to/file', (err, response) => {
 
 ## Purity
 
-A function is pure if the return value is only determined by its
-input values, and does not produce side effects.
+Czystość. Funkcja jest "czysta" (pure) wtedy, kiedy wartość przez nią zwracana jest zdeterminowana jedynie przez jej wartości wejściowe i nie ma przy tym żadnych "efektów ubocznych" (side effects).
 
 ```js
 const greet = (name) => `Hi, ${name}`
@@ -251,7 +250,7 @@ const greet = (name) => `Hi, ${name}`
 greet('Brianne') // 'Hi, Brianne'
 ```
 
-As opposed to each of the following:
+W przeciwieństwie do poniższych przykładów:
 
 ```js
 window.name = 'Brianne'
@@ -261,7 +260,7 @@ const greet = () => `Hi, ${window.name}`
 greet() // "Hi, Brianne"
 ```
 
-The above example's output is based on data stored outside of the function...
+Wynik powyższego przykładu bazuje na danych przechowywanych poza funkcją...
 
 ```js
 let greeting
@@ -274,11 +273,11 @@ greet('Brianne')
 greeting // "Hi, Brianne"
 ```
 
-... and this one modifies state outside of the function.
+... a w tym przykładzie modyfikowany jest stan na zewnątrz funkcji.
 
 ## Side effects
 
-A function or expression is said to have a side effect if apart from returning a value, it interacts with (reads from or writes to) external mutable state.
+Funkcja lub wyrażenie ma "efekt uboczny" (side effect) wtedy, kiedy oprócz zwracania wartości, zachodzi interakcja (odczyt lub zapis) z zewnętrznym, mutowalnym stanem.
 
 ```js
 const differentEveryTime = new Date()

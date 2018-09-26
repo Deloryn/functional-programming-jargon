@@ -289,7 +289,7 @@ console.log('IO is a side effect!')
 
 ## Idempotent
 
-A function is idempotent if reapplying it to its result does not produce a different result.
+Funkcja jest idempotentna wtedy, kiedy jej ponowne wywołanie na jej wartości (zobacz poniżej) nie zwraca innego wyniku.
 
 ```
 f(f(x)) ≍ f(x)
@@ -305,28 +305,28 @@ sort(sort(sort([2, 1])))
 
 ## Point-Free Style
 
-Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying) or other [Higher-Order functions](#higher-order-functions-hof). A.K.A Tacit programming.
+Sposób pisania funkcji, w którym nie mają one jawnej definicji argumentów, z jakich korzystają. Ten styl zazwyczaj potrzebuje wykorzystania [currying](#currying) lub innych [funkcji wyższego rzędu](#higher-order-functions-hof). Styl znany również jako "Tacit programming".
 
 ```js
-// Given
+// Na początku mamy:
 const map = (fn) => (list) => list.map(fn)
 const add = (a) => (b) => a + b
 
-// Then
+// Później:
 
-// Not points-free - `numbers` is an explicit argument
+// Nie w stylu points-free - `numbers` to argument jawny
 const incrementAll = (numbers) => map(add(1))(numbers)
 
-// Points-free - The list is an implicit argument
+// W stylu points-free - lista jest argumentem niejawnym
 const incrementAll2 = map(add(1))
 ```
 
-`incrementAll` identifies and uses the parameter `numbers`, so it is not points-free.  `incrementAll2` is written just by combining functions and values, making no mention of its arguments.  It __is__ points-free.
+`incrementAll` identyfikuje i korzysta z parametru `numbers`, więc to nie jest w stylu points-free. Funkcja `incrementalAll2` jest napisana poprzez łączenie funkcji i wartości w taki sposób, że nie ma wzmianki o jej argumentach. __Jest__ to zatem points-free.
 
-Points-free function definitions look just like normal assignments without `function` or `=>`.
+Definicja funkcji napisanej w stylu points-free wygląda tak, jak normalne przypisania bez `function` czy `=>`.
 
 ## Predicate
-A predicate is a function that returns true or false for a given value. A common use of a predicate is as the callback for array filter.
+Predykat to funkcja, która zwraca albo prawdę (true), albo fałsz (false) dla podanej wartości. Powszechnym zastosowaniem predykatu jest callback dla array filter.
 
 ```js
 const predicate = (a) => a > 2

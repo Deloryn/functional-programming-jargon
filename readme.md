@@ -376,11 +376,11 @@ __Further reading__
 
 ## Value
 
-Anything that can be assigned to a variable.
+Value (wartość) to cokolwiek, co może zostać przypisane do zmiennej.
 
 ```js
 5
-Object.freeze({name: 'John', age: 30}) // The `freeze` function enforces immutability.
+Object.freeze({name: 'John', age: 30}) // Funkcja `freeze` wymusza niemutowalność
 ;(a) => a
 ;[1]
 undefined
@@ -388,14 +388,14 @@ undefined
 
 ## Constant
 
-A variable that cannot be reassigned once defined.
+Stała (constant) to zmienna, do której nie można już nic przypisać, gdy raz została już zdefiniowana.
 
 ```js
 const five = 5
 const john = Object.freeze({name: 'John', age: 30})
 ```
 
-Constants are [referentially transparent](#referential-transparency). That is, they can be replaced with the values that they represent without affecting the result.
+Stałe cechuje [referential transparency](#referential-transparency. That is, they can be replaced with the values that they represent without affecting the result.
 
 With the above two constants the following expression will always return `true`.
 

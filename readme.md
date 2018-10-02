@@ -473,25 +473,23 @@ lift(increment)([2]) // [3]
 
 ## Referential Transparency
 
-An expression that can be replaced with its value without changing the
-behavior of the program is said to be referentially transparent.
+Referential transparency cechuje się tym, że wyrażenie może być podmienione na swoją wartość bez zmieniania zachowania programu.
 
-Say we have function greet:
+Mamy funkcję `greet`:
 
 ```js
 const greet = () => 'Hello World!'
 ```
 
-Any invocation of `greet()` can be replaced with `Hello World!` hence greet is
-referentially transparent.
+Każde wywołanie `greet()` może być zamienione na `Hello World!`, zatem `greet` jest referencyjnie transparentne.
 
 ##  Equational Reasoning
 
-When an application is composed of expressions and devoid of side effects, truths about the system can be derived from the parts.
+Kiedy aplikacja jest złożona z wyrażeń i pozbawiona side effectów, prawdy o systemie można wyprowadzić z jego części.
 
 ## Lambda
 
-An anonymous function that can be treated like a value.
+Funkcja anonimowa, która może być traktowana jak wartość.
 
 ```js
 ;(function (a) {
@@ -500,24 +498,25 @@ An anonymous function that can be treated like a value.
 
 ;(a) => a + 1
 ```
-Lambdas are often passed as arguments to Higher-Order functions.
+Lambdy są często przekazywane jako argumenty do [funkcji wyższego rzędu](#higher-order-functions-hof).
 
 ```js
 ;[1, 2].map((a) => a + 1) // [2, 3]
 ```
 
-You can assign a lambda to a variable.
+Możesz przypisać wyrażenie lambda do zmiennej.
 
 ```js
 const add1 = (a) => a + 1
 ```
 
 ## Lambda Calculus
-A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
+
+Gałąź matematyki, która wykorzystuje funkcje, aby stworzyć [uniwersalny model obliczeń](https://en.wikipedia.org/wiki/Lambda_calculus).
 
 ## Lazy evaluation
 
-Lazy evaluation is a call-by-need evaluation mechanism that delays the evaluation of an expression until its value is needed. In functional languages, this allows for structures like infinite lists, which would not normally be available in an imperative language where the sequencing of commands is significant.
+Lazy evaluation to mechanizm wartościowania typu call-by-need. Ewaluacja jest opóźniona do momentu, kiedy wartość jest potrzebna. W językach funkcyjnych pozwala to na struktury takie jak nieskończone listy, które normalnie nie byłyby dostępne w języku imperatywnym, gdzie sekwencjonowanie poleceń jest istotne.
 
 ```js
 const rand = function*() {
@@ -529,20 +528,21 @@ const rand = function*() {
 
 ```js
 const randIter = rand()
-randIter.next() // Each execution gives a random value, expression is evaluated on need.
+randIter.next() // Każde wywołanie zwraca losową wartość. Wyrażenie jest obliczane wtedy, kiedy jest potrzebne.
 ```
 
 ## Monoid
 
-An object with a function that "combines" that object with another of the same type.
+Obiekt z funkcją, która "łączy" ten obiekt z innym obiektem tego samego typu.
 
-One simple monoid is the addition of numbers:
+Przykładem prostego monoidu jest dodawanie liczb:
 
 ```js
 1 + 1 // 2
 ```
-In this case number is the object and `+` is the function.
+W tym przypadku liczba jest obiektem, a `+` jest funkcją.
 
+Musi również istnieć wartość "tożsamości"
 An "identity" value must also exist that when combined with a value doesn't change it.
 
 The identity value for addition is `0`.

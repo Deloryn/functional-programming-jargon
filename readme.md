@@ -336,10 +336,10 @@ const predicate = (a) => a > 2
 
 ## Contracts
 
-A contract specifies the obligations and guarantees of the behavior from a function or expression at runtime. This acts as a set of rules that are expected from the input and output of a function or expression, and errors are generally reported whenever a contract is violated.
+Kontrakt określa obowiązki i gwarancje zachowania z funkcji lub wyrażenia w momencie wykonywania. Zachowuje się jak zestaw zasad, które są oczekiwane przez wejście i wyjście funkcji lub wyrażenia. Kiedykolwiek kontrakt zostanie naruszony, błędy są raportowane.
 
 ```js
-// Define our contract : int -> int
+// Zdefiniuj nasz kontrakt : int -> int
 const contract = (input) => {
   if (typeof input === 'number') return true
   throw new Error('Contract violated: expected int -> int')
@@ -348,31 +348,30 @@ const contract = (input) => {
 const addOne = (num) => contract(num) && num + 1
 
 addOne(2) // 3
-addOne('some string') // Contract violated: expected int -> int
+addOne('some string') // Kontrakt naruszony: oczekiwany jest int -> int
 ```
 
 ## Category
 
-A category in category theory is a collection of objects and morphisms between them. In programming, typically types
-act as the objects and functions as morphisms.
+Kategoria (w teorii kategorii) jest kolekcją obiektów i morfizmów między nimi. W programowaniu, typy zwykle zachowują się jak obiekty, a funkcje jak morfizmy.
 
-To be a valid category 3 rules must be met:
+Aby kategoria była poprawna, muszą być spełnione 3 zasady:
 
-1. There must be an identity morphism that maps an object to itself.
-    Where `a` is an object in some category,
-    there must be a function from `a -> a`.
-2. Morphisms must compose.
-    Where `a`, `b`, and `c` are objects in some category,
-    and `f` is a morphism from `a -> b`, and `g` is a morphism from `b -> c`;
-    `g(f(x))` must be equivalent to `(g • f)(x)`.
-3. Composition must be associative
-    `f • (g • h)` is the same as `(f • g) • h`
+1. Musi być morfizm tożsamości, który mapuje obiekt do siebie.
+    Gdzie `a` jest obiektem w jakiejś kategorii,
+    tam musi być funkcja postaci: `a -> a`.
+2. Morfizmy muszą być "składalne".
+    Gdzie `a`, `b` i `c` są obiektami jakiejś kategorii
+    i `f` jest morfizmem postaci `a -> b` oraz `g` jest morfizmem postaci `b -> c`;
+    `g(f(fx))` musi być równoważne `(g • f)(x)`.
+3. Kompozycja musi być asocjacyjna.
+    `f • (g • h)` jest tym samym, co `(f • g) • h`
 
-Since these rules govern composition at very abstract level, category theory is great at uncovering new ways of composing things.
+Ponieważ te zasady rządzą kompozycją na bardzo abstrakcyjnym poziomie, teoria kategorii jest świetna w odkrywaniu nowych sposobów komponowania rzeczy.
 
-__Further reading__
+__Dalsza lektura__
 
-* [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
+* [Teoria kategorii dla programistów](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
 
 ## Value
 
@@ -405,28 +404,28 @@ john.age + five === ({name: 'John', age: 30}).age + (5)
 
 ## Functor
 
-An object that implements a `map` function which, while running over each value in the object to produce a new object, adheres to two rules:
+Obiekt, który implementuje funkcję `map`, która - działając na każdej wartości obiektu i tworząc nowy obiekt - trzyma się dwóch zasad:
 
-__Preserves identity__
+__Zachowuje tożsamość__
 ```
 object.map(x => x) ≍ object
 ```
 
-__Composable__
+__Jest kompozycyjny (zobacz niżej)__
 
 ```
 object.map(compose(f, g)) ≍ object.map(g).map(f)
 ```
 
-(`f`, `g` are arbitrary functions)
+(`f`, `g` są dowolnymi funkcjami)
 
-A common functor in JavaScript is `Array` since it abides to the two functor rules:
+Powszechnym funktorem w JavaScripcie jest `Array`, ponieważ stosuje się do dwóch zasad funktora:
 
 ```js
 ;[1, 2, 3].map(x => x) // = [1, 2, 3]
 ```
 
-and
+oraz
 
 ```js
 const f = x => x + 1
@@ -437,9 +436,9 @@ const g = x => x * 2
 ```
 
 ## Pointed Functor
-An object with an `of` function that puts _any_ single value into it.
+Obiekt z funkcją `of`, która umieszcza w nim pojedynczą wartość _any_.
 
-ES2015 adds `Array.of` making arrays a pointed functor.
+ES2015 udostępnia `Array.of`, który zmienia tablice w pointed functory.
 
 ```js
 Array.of(1) // [1]
@@ -447,22 +446,22 @@ Array.of(1) // [1]
 
 ## Lift
 
-Lifting is when you take a value and put it into an object like a [functor](#pointed-functor). If you lift a function into an [Applicative Functor](#applicative-functor) then you can make it work on values that are also in that functor.
+Lifting jest wtedy, kiedy bierzesz wartość i wrzucasz ją do obiektum tak jak w [pointed functor](#pointed-functor). Jeśli liftingujesz funkcję do [Applicative Functor](#applicative-functor), możesz sprawić, że zadziała także na tych wartościach, które są w tym funktorze.
 
-Some implementations have a function called `lift`, or `liftA2` to make it easier to run functions on functors.
+Aby ułatwić korzystanie z funkcji na funktorach, niektóre implementacje mają funkcje `lift` lub `liftA2`.
 
 ```js
-const liftA2 = (f) => (a, b) => a.map(f).ap(b) // note it's `ap` and not `map`.
+const liftA2 = (f) => (a, b) => a.map(f).ap(b) // zauważ, że to jest `ap`, a nie `map`
 
 const mult = a => b => a * b
 
-const liftedMult = liftA2(mult) // this function now works on functors like array
+const liftedMult = liftA2(mult) // ta funkcja działa teraz na funktorach tak, jak tablica
 
 liftedMult([1, 2], [3]) // [3, 6]
 liftA2(a => b => a + b)([1, 2], [3, 4]) // [4, 5, 5, 6]
 ```
 
-Lifting a one-argument function and applying it does the same thing as `map`.
+Lifting to jednoargumentowa funkcja i używanie jej robi to samo, co `map`.
 
 ```js
 const increment = (x) => x + 1

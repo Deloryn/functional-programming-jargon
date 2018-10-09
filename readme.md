@@ -845,23 +845,24 @@ Flow ma [union types](https://flow.org/en/docs/types/unions/), a TypeScript ma [
 
 ### Product type
 
-A **product** type combines types together in a way you're probably more familiar with:
+**Product** type łączy typy razem w sposób, który prawdopodobnie jest Ci bardziej znany:
+combines types together in a way you're probably more familiar with:
 
 ```js
 // point :: (Number, Number) -> {x: Number, y: Number}
 const point = (x, y) => ({ x, y })
 ```
-It's called a product because the total possible values of the data structure is the product of the different values. Many languages have a tuple type which is the simplest formulation of a product type.
+Nazwa wzięła się stąd, że wszystkie możliwe wartości tej struktury danych są produktem innych wartości. Wiele języków ma typ "tuple", który jest najprostszym sformułowaniem product type.
 
-See also [Set theory](https://en.wikipedia.org/wiki/Set_theory).
+Zobacz także [Teoria setów](https://en.wikipedia.org/wiki/Set_theory).
 
 ## Option
-Option is a [sum type](#sum-type) with two cases often called `Some` and `None`.
+Opcja to [sum type](#sum-type) z dwoma przypadkami, zwykle nazywanymi `Some` i `None`.
 
-Option is useful for composing functions that might not return a value.
+Opcja jest użyteczna w komponowaniu funkcji, które mogą nie zwracać wartości.
 
 ```js
-// Naive definition
+// Definicja naiwna
 
 const Some = (v) => ({
   val: v,
@@ -885,7 +886,7 @@ const None = () => ({
 // maybeProp :: (String, {a}) -> Option a
 const maybeProp = (key, obj) => typeof obj[key] === 'undefined' ? None() : Some(obj[key])
 ```
-Use `chain` to sequence functions that return `Option`s
+Użyj `chain` do ustawienia kolejności funkcji, które zwracają `Option`.
 ```js
 
 // getItem :: Cart -> Option CartItem
@@ -902,9 +903,9 @@ getNestedPrice({item: {foo: 1}}) // None()
 getNestedPrice({item: {price: 9.99}}) // Some(9.99)
 ```
 
-`Option` is also known as `Maybe`. `Some` is sometimes called `Just`. `None` is sometimes called `Nothing`.
+`Option` jest znane również jako `Maybe`. `Some` jest czasami nazywane `Just`. `None` jest czasem nazywane `Nothing`.
 
-## Functional Programming Libraries in JavaScript
+## Biblioteki programowania funkcyjnego w JavaScripcie
 
 * [mori](https://github.com/swannodette/mori)
 * [Immutable](https://github.com/facebook/immutable-js/)
@@ -922,4 +923,4 @@ getNestedPrice({item: {price: 9.99}}) // Some(9.99)
 
 ---
 
-__P.S:__ This repo is successful due to the wonderful [contributions](https://github.com/hemanth/functional-programming-jargon/graphs/contributors)!
+__P.S:__ To repo się udało dzięki [udziałowi różnych ludzi](https://github.com/hemanth/functional-programming-jargon/graphs/contributors)!

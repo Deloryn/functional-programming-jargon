@@ -8,7 +8,7 @@ Przykłady są przedstawione w JavaScript (ES2015). [Dlaczego JavaScript?](https
 Tam, gdzie to możliwe, dokument ten korzysta z terminów zdefiniowanych w [Fantasy Land spec](https://github.com/fantasyland/fantasy-land)
 
 __Tłumaczenia__
-* [Link do oryginału (wersja angielska)](https://github.com/hemanth/functional-programming-jargon)
+* [Angielski (oryginał)](https://github.com/hemanth/functional-programming-jargon)
 * [Portugalski](https://github.com/alexmoreno/jargoes-programacao-funcional)
 * [Hiszpański](https://github.com/idcmardelplata/functional-programming-jargon/tree/master)
 * [Chiński](https://github.com/shfshanyue/fp-jargon-zh)
@@ -68,7 +68,7 @@ __Spis treści__
 
 ## Arity
 
-Arność. Liczba argumentów pobieranych przez funkcję. Pochodzi od słów takich jak unary, binary, ternary itd. To słowo wyróżnia się tym, że składa się z dwóch przyrostków ("-ary" i "-ity"). Np. dodawanie pobiera dwa argumenty, zatem jest zdefiniowane jako funkcja binarna lub jako funkcja o arności równej 2. Ludzie, którzy preferują greckie korzenie nazewnictwa (zamiast łacińskich), mogą czasem taką funkcję nazywać "diadyczną". Kiedy ilość argumentów funkcji może być różna, jest ona nazywana funkcją ze zmienną liczbą argumentów (variadic). Natomiast funkcja binarna musi mieć dwa i tylko dwa argumenty. Zobacz poniżej: currying i partial application.
+Arność. Liczba argumentów pobieranych przez funkcję. Pochodzi od słów takich jak unary, binary, ternary itd. To słowo wyróżnia się tym, że składa się z dwóch przyrostków ("-ary" i "-ity"). Np. dodawanie pobiera dwa argumenty, zatem jest zdefiniowane jako funkcja binarna lub jako funkcja o arności równej 2. Ludzie, którzy preferują greckie korzenie nazewnictwa (zamiast łacińskich), mogą czasem taką funkcję nazywać "diadyczną". Kiedy ilość argumentów funkcji może być różna, jest ona nazywana funkcją ze zmienną liczbą argumentów (variadic). Natomiast funkcja binarna musi mieć dwa i tylko dwa argumenty. Zobacz poniżej: [Currying](#currying) i [Partial Application](#partial-application)
 
 ```js
 const sum = (a, b) => a + b

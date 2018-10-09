@@ -736,63 +736,63 @@ sum([1, 2, 3]) // 6
 ```
 
 ## Lens ##
-A lens is a structure (often an object or function) that pairs a getter and a non-mutating setter for some other data
-structure.
+
+Lens to struktura (często obiekt lub funkcja), która łączy w parę getter oraz niemutujący setter dla jakiejś struktury danych.
 
 ```js
-// Using [Ramda's lens](http://ramdajs.com/docs/#lens)
+// Korzystamy z [Ramda's lens](http://ramdajs.com/docs/#lens)
 const nameLens = R.lens(
-  // getter for name property on an object
+  // getter dla właściwości "name" obiektu
   (obj) => obj.name,
-  // setter for name property
+  // setter dla właściwości "name"
   (val, obj) => Object.assign({}, obj, {name: val})
 )
 ```
 
-Having the pair of get and set for a given data structure enables a few key features.
+Posiadanie pary gettera i settera dla danej struktury daje kilka istotnych możliwości.
 
 ```js
 const person = {name: 'Gertrude Blanch'}
 
-// invoke the getter
+// wywołaj getter
 R.view(nameLens, person) // 'Gertrude Blanch'
 
-// invoke the setter
+// wywołaj setter
 R.set(nameLens, 'Shafi Goldwasser', person) // {name: 'Shafi Goldwasser'}
 
-// run a function on the value in the structure
+// odpal funkcję na wartości w strukturze
 R.over(nameLens, uppercase, person) // {name: 'GERTRUDE BLANCH'}
 ```
 
-Lenses are also composable. This allows easy immutable updates to deeply nested data.
+Lensy są także kompozycyjne. To pozwala na proste, niemutowalne aktualizacje głęboko zagnieżdżonych danych.
 
 ```js
-// This lens focuses on the first item in a non-empty array
+// Ten lens skupia się na pierwszym elemencie niepustej tablicy
 const firstLens = R.lens(
-  // get first item in array
+  // pobierz pierwszy element tablicy
   xs => xs[0],
-  // non-mutating setter for first item in array
+  // niemutujący setter dla pierwszego elementu tablicy
   (val, [__, ...xs]) => [val, ...xs]
 )
 
 const people = [{name: 'Gertrude Blanch'}, {name: 'Shafi Goldwasser'}]
 
-// Despite what you may assume, lenses compose left-to-right.
+// Poimo tego, co być może zakładasz, lensy komponują się od lewej do prawej.
 R.over(compose(firstLens, nameLens), uppercase, people) // [{'name': 'GERTRUDE BLANCH'}, {'name': 'Shafi Goldwasser'}]
 ```
 
-Other implementations:
-* [partial.lenses](https://github.com/calmm-js/partial.lenses) - Tasty syntax sugar and a lot of powerful features
-* [nanoscope](http://www.kovach.me/nanoscope/) - Fluent-interface
+Inne implementacje:
+* [partial.lenses](https://github.com/calmm-js/partial.lenses) - Smakowity lukier składniowy oraz wiele potężnych możliwości
+* [nanoscope](http://www.kovach.me/nanoscope/) - Płynny interfejs
 
 ## Type Signatures
 
-Often functions in JavaScript will include comments that indicate the types of their arguments and return values.
+Funkcje w JavaScripcie często zawierają komentarze, które wskazują na typy ich argumentów oraz zwracanych wartości.
 
-There's quite a bit of variance across the community but they often follow the following patterns:
+W społeczności występują spore różnice, ale często można zaobserwować te wzorce:
 
 ```js
-// functionName :: firstArgType -> secondArgType -> returnType
+// nazwaFunkcji :: typPierwszegoArgumentu -> typDrugiegoArgumentu -> typZwracany
 
 // add :: Number -> Number -> Number
 const add = (x) => (y) => x + y
@@ -801,46 +801,47 @@ const add = (x) => (y) => x + y
 const increment = (x) => x + 1
 ```
 
-If a function accepts another function as an argument it is wrapped in parentheses.
+Jeśli argumentem jest funkcja, to pisana jest wtedy w nawiasie.
 
 ```js
 // call :: (a -> b) -> a -> b
 const call = (f) => (x) => f(x)
 ```
 
-The letters `a`, `b`, `c`, `d` are used to signify that the argument can be of any type. The following version of `map` takes a function that transforms a value of some type `a` into another type `b`, an array of values of type `a`, and returns an array of values of type `b`.
+Litery `a`, `b`, `c`, `d` są używane do oznaczenia, że argument może być dowolnego typu. Następująca wersja `map` pobiera funkcję (która przekształca wartość pewnego typu `a` do innego typu `b`) i tablicę wartości typu `a`, i finalnie zwraca tablicę wartości typu `b`.
 
 ```js
 // map :: (a -> b) -> [a] -> [b]
 const map = (f) => (list) => list.map(f)
 ```
 
-__Further reading__
+__Dalsza lektura__
 * [Ramda's type signatures](https://github.com/ramda/ramda/wiki/Type-Signatures)
-* [Mostly Adequate Guide](https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch7.html#whats-your-type)
-* [What is Hindley-Milner?](http://stackoverflow.com/a/399392/22425) on Stack Overflow
+* [Najbardziej odpowiedni przewodnik](https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch7.html#whats-your-type)
+* [Co to jest Hindley-Milner?](http://stackoverflow.com/a/399392/22425) na Stack Overflow
 
 ## Algebraic data type
-A composite type made from putting other types together. Two common classes of algebraic types are [sum](#sum-type) and [product](#product-type).
+Typ złożony, stworzony z umieszczenia różnych typów razem. Dwie powszechne klasy typów algebraicznych to [sum](#sum-type) oraz [product](#product-type).
 
 ### Sum type
-A Sum type is the combination of two types together into another one. It is called sum because the number of possible values in the result type is the sum of the input types.
 
-JavaScript doesn't have types like this but we can use `Set`s to pretend:
+Jest to połączenie dwóch typów w jeden nowy. Nazwa "sum" wzięła się z tego, że liczba możliwych wartości w typie wynikowym jest sumą typów wejściowych.
+
+JavaScript nie ma tego rodzaju typów, ale możemy skorzystać z`Set`ów, by niejako je "udawać":
 ```js
-// imagine that rather than sets here we have types that can only have these values
+// wyobraź sobie, że zamiast setów mamy tu typy, które mogą posiadać tylko takie wartości
 const bools = new Set([true, false])
 const halfTrue = new Set(['half-true'])
 
-// The weakLogic type contains the sum of the values from bools and halfTrue
+// Typ weakLogic zawiera sumę wartości z bools i halfTrue
 const weakLogicValues = new Set([...bools, ...halfTrue])
 ```
 
-Sum types are sometimes called union types, discriminated unions, or tagged unions.
+Typy sum są czasem nazywane typami unii (union types), dyskryminowanch unii (discriminated unions) lub unii oznaczonych (tagged unions).
 
-There's a [couple](https://github.com/paldepind/union-type) [libraries](https://github.com/puffnfresh/daggy) in JS which help with defining and using union types.
+W JavaScripcie istnieje [kilka](https://github.com/paldepind/union-type) [bibliotek](https://github.com/puffnfresh/daggy), które pomagają przy definiowaniu i korzystaniu z unii.
 
-Flow includes [union types](https://flow.org/en/docs/types/unions/) and TypeScript has [Enums](https://www.typescriptlang.org/docs/handbook/enums.html) to serve the same role.
+Flow ma [union types](https://flow.org/en/docs/types/unions/), a TypeScript ma [Enums](https://www.typescriptlang.org/docs/handbook/enums.html), które spełniają tę samą rolę.
 
 ### Product type
 

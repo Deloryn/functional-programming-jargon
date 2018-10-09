@@ -411,7 +411,7 @@ __Zachowuje tożsamość__
 object.map(x => x) ≍ object
 ```
 
-__Jest kompozycyjny (zobacz niżej)__
+__Jest kompozycyjna (zobacz niżej)__
 
 ```
 object.map(compose(f, g)) ≍ object.map(g).map(f)
@@ -542,66 +542,65 @@ Przykładem prostego monoidu jest dodawanie liczb:
 ```
 W tym przypadku liczba jest obiektem, a `+` jest funkcją.
 
-Musi również istnieć wartość "tożsamości"
-An "identity" value must also exist that when combined with a value doesn't change it.
+Musi również istnieć wartość tożsamości (identity value) - taka, że kiedy połączyć ją z wartością, to ona się nie zmienia. Zobacz poniżej:
 
-The identity value for addition is `0`.
+Wartością tożsamości dla dodawania jest `0`.
 ```js
 1 + 0 // 1
 ```
 
-It's also required that the grouping of operations will not affect the result (associativity):
+Jest także wymagane to, żeby grupowanie operacji nie wpływało na wynik (asocjatywność):
 
 ```js
 1 + (2 + 3) === (1 + 2) + 3 // true
 ```
 
-Array concatenation also forms a monoid:
+Konkatenacja tablic również tworzy monoid:
 
 ```js
 ;[1, 2].concat([3, 4]) // [1, 2, 3, 4]
 ```
 
-The identity value is empty array `[]`
+W tym przypadku wartością tożsamości jest pusta tablica `[]`
 
 ```js
 ;[1, 2].concat([]) // [1, 2]
 ```
 
-If identity and compose functions are provided, functions themselves form a monoid:
+Jeśli mamy funkcje tożsamości oraz kompozycji (obie), one także tworzą monoid:
 
 ```js
 const identity = (a) => a
 const compose = (f, g) => (x) => f(g(x))
 ```
-`foo` is any function that takes one argument.
+`foo` jest dowolną jednoargumentową funkcją.
 ```
 compose(foo, identity) ≍ compose(identity, foo) ≍ foo
 ```
 
 ## Monad
 
-A monad is an object with [`of`](#pointed-functor) and `chain` functions. `chain` is like [`map`](#functor) except it un-nests the resulting nested object.
+Monada jest obiektem z funkcją [`of`](#pointed-functor) oraz `chain`. `chain` jest jak [`map`](#functor) z tym wyjątkiem, że "odgnieżdża" zagnieżdżony obiekt.
 
 ```js
-// Implementation
+// Implementacja
 Array.prototype.chain = function (f) {
   return this.reduce((acc, it) => acc.concat(f(it)), [])
 }
 
-// Usage
+// Użycie
 Array.of('cat,dog', 'fish,bird').chain((a) => a.split(',')) // ['cat', 'dog', 'fish', 'bird']
 
-// Contrast to map
+// Różnica w stosunku do map
 Array.of('cat,dog', 'fish,bird').map((a) => a.split(',')) // [['cat', 'dog'], ['fish', 'bird']]
 ```
 
-`of` is also known as `return` in other functional languages.
-`chain` is also known as `flatmap` and `bind` in other languages.
+`of` w innych językach funkcyjnych jest znane także jako `return`
+`chain` w innych językach jest znane także jako `flatmap` i `bind`
 
 ## Comonad
 
-An object that has `extract` and `extend` functions.
+Comonad to obiekt, który ma funkcje `extract` oraz `extend`.
 
 ```js
 const CoIdentity = (v) => ({
@@ -615,13 +614,13 @@ const CoIdentity = (v) => ({
 })
 ```
 
-Extract takes a value out of a functor.
+`extract` wydobywa wartość z funktora.
 
 ```js
 CoIdentity(1).extract() // 1
 ```
 
-Extend runs a function on the comonad. The function should return the same type as the comonad.
+`extend` wykonuje funkcję na comonadzie. Funkcja ta powinna zwracać ten sam typ, jakim jest ten comonad.
 
 ```js
 CoIdentity(1).extend((co) => co.extract() + 1) // CoIdentity(2)
@@ -629,32 +628,32 @@ CoIdentity(1).extend((co) => co.extract() + 1) // CoIdentity(2)
 
 ## Applicative Functor
 
-An applicative functor is an object with an `ap` function. `ap` applies a function in the object to a value in another object of the same type.
+Funktorem aplikacyjnym jest obiekt z funkcją `ap`. Funkcja ta aplikuje funkcję z tego obiektu do wartości innego obiektu tego samego typu.
 
 ```js
-// Implementation
+// Implementacja
 Array.prototype.ap = function (xs) {
   return this.reduce((acc, f) => acc.concat(xs.map(f)), [])
 }
 
-// Example usage
+// Pzykładowe użycie
 ;[(a) => a + 1].ap([1]) // [2]
 ```
 
-This is useful if you have two objects and you want to apply a binary function to their contents.
+Jest to użyteczne, kiedy masz dwa obiekty i chcesz zaaplikować funkcję binarną do ich zawartości.
 
 ```js
-// Arrays that you want to combine
+// Tablice, które chcesz połączyć:
 const arg1 = [1, 3]
 const arg2 = [4, 5]
 
-// combining function - must be curried for this to work
+// łącząca funkcja - w tym przypadku trzeba zastosować currying, aby działało, jak trzeba
 const add = (x) => (y) => x + y
 
 const partiallyAppliedAdds = [add].ap(arg1) // [(y) => 1 + y, (y) => 3 + y]
 ```
 
-This gives you an array of functions that you can call `ap` on to get the result:
+W wyniku otrzymujesz tablicę funkcji, na której możesz wywołać `ap`, aby otrzymać wynik:
 
 ```js
 partiallyAppliedAdds.ap(arg2) // [5, 6, 7, 8]
@@ -662,11 +661,11 @@ partiallyAppliedAdds.ap(arg2) // [5, 6, 7, 8]
 
 ## Morphism
 
-A transformation function.
+Morfizm to funkcja transformacji.
 
 ### Endomorphism
 
-A function where the input type is the same as the output.
+Endomorfizm to funkcja, której typ wejściowy (input) jest taki sam, jak jej typ wyjścia (output).
 
 ```js
 // uppercase :: String -> String
@@ -678,12 +677,12 @@ const decrement = (x) => x - 1
 
 ### Isomorphism
 
-A pair of transformations between 2 types of objects that is structural in nature and no data is lost.
+Izomorfizm to para przekształceń między 2 typami obiektów, która jest strukturalna z natury i żadne dane nie są utracone.
 
-For example, 2D coordinates could be stored as an array `[2,3]` or object `{x: 2, y: 3}`.
+Na przykład: współrzędne 2D mogłyby być przechowywane jako tablica `[2,3]` lub obiekt `{x: 2, y: 3}`.
 
 ```js
-// Providing functions to convert in both directions makes them isomorphic.
+// Dostarczenie funkcji do konwersji w obu kierunkach czyni je izomorficznymi.
 const pairToCoords = (pair) => ({x: pair[0], y: pair[1]})
 
 const coordsToPair = (coords) => [coords.x, coords.y]
@@ -697,9 +696,9 @@ pairToCoords(coordsToPair({x: 1, y: 2})) // {x: 1, y: 2}
 
 ## Setoid
 
-An object that has an `equals` function which can be used to compare other objects of the same type.
+Setoid to obiekt, który ma funkcję `equals`, która może być użyta, aby porównać inne obiektu tego samego typu.
 
-Make array a setoid:
+Spraw, żeby tablica była setoidem:
 
 ```js
 Array.prototype.equals = function (arr) {
@@ -721,7 +720,7 @@ Array.prototype.equals = function (arr) {
 
 ## Semigroup
 
-An object that has a `concat` function that combines it with another object of the same type.
+Obiekt, który ma funkcję `concat`, która łączy go z innym obiektem tego samego typu.
 
 ```js
 ;[1].concat([2]) // [1, 2]
@@ -729,7 +728,7 @@ An object that has a `concat` function that combines it with another object of t
 
 ## Foldable
 
-An object that has a `reduce` function that can transform that object into some other type.
+Obiekt, który ma funkcję `reduce`, która może przekształcić ten obiekt do jakiegoś innego typu.
 
 ```js
 const sum = (list) => list.reduce((acc, val) => acc + val, 0)

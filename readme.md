@@ -845,8 +845,7 @@ Flow ma [union types](https://flow.org/en/docs/types/unions/), a TypeScript ma [
 
 ### Product type
 
-**Product** type łączy typy razem w sposób, który prawdopodobnie jest Ci bardziej znany:
-combines types together in a way you're probably more familiar with:
+**Product  type** łączy typy razem w sposób, który prawdopodobnie jest Ci bardziej znany:
 
 ```js
 // point :: (Number, Number) -> {x: Number, y: Number}
